@@ -11,6 +11,7 @@ namespace OnSales.Web.Data
 
         public DbSet<Country> Countries { get; set; }
         public DbSet<TaxesType> TaxeTypes { get; set; }
+        public DbSet<Category> Categories { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -18,6 +19,9 @@ namespace OnSales.Web.Data
 
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<TaxesType>().HasIndex(c => c.NameTaxesType).IsUnique();
+
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Category>().HasIndex(category => category.NameCategory).IsUnique();
 
         }
 
