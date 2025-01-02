@@ -4,20 +4,11 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Delete</h1>
+<h1>Eliminar</h1>
 
 <h3>Esta seguro de eliminar este registro?</h3>
 <div>
-    <h4>País</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NameCountry)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NameCountry)
-        </dd>
-    </dl>
+   <partial name="_CountryDetails" />
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
