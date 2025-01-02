@@ -10,6 +10,7 @@ namespace OnSales.Web.Data
         }
 
         public DbSet<Country> Countries { get; set; }
+        public DbSet<TaxesType> TaxeTypes { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

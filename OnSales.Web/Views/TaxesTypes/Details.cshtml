@@ -1,4 +1,4 @@
-﻿@model OnSales.Web.Data.Entities.Country
+﻿@model OnSales.Web.Data.Entities.TaxesType
 
 @{
     ViewData["Title"] = "Details";
@@ -7,14 +7,14 @@
 <h1>Detalles</h1>
 
 <div>
-    <h4>País</h4>
+    <h4>Tipo Impuesto</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NameCountry)
+            @Html.DisplayNameFor(model => model.NameTaxesType)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NameCountry)
+            @Html.DisplayFor(model => model.NameTaxesType)
         </dd>
     </dl>
 </div>

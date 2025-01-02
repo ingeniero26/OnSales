@@ -1,4 +1,4 @@
-﻿@model IEnumerable<OnSales.Web.Data.Entities.Country>
+﻿@model IEnumerable<OnSales.Web.Data.Entities.TaxesType>
 
 @{
     ViewData["Title"] = "Index";
@@ -7,20 +7,20 @@
 
 
 <p>
-    <a asp-action="Create" class="btn btn-outline-primary">Nuevo</a>
+    <a asp-action="Create" class="btn btn-outline-primary">Nuevo </a>
 </p>
 <div class="row">
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">Países</h3>
+                <h3 class="panel-title">Tipo Impuestos</h3>
             </div>
             <div class="panel-body">
-                <table class="table table-hover table-responsive table-striped" id="tb-country">
+                <table class="table table-hover table-responsive table-striped" id="tb-type-taxes">
                     <thead>
                         <tr>
                             <th>
-                                @Html.DisplayNameFor(model => model.NameCountry)
+                                @Html.DisplayNameFor(model => model.NameTaxesType)
                             </th>
                             <th></th>
                         </tr>
@@ -30,7 +30,7 @@
                         {
                             <tr>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.NameCountry)
+                                    @Html.DisplayFor(modelItem => item.NameTaxesType)
                                 </td>
                                 <td>
                                     <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-warning">Editar</a> |
@@ -53,7 +53,7 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#tb-country').DataTable({
+            $('#tb-type-taxes').DataTable({
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
                 },
@@ -65,4 +65,5 @@
         });
     </script>
 }
+
 

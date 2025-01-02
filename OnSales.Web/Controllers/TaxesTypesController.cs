@@ -10,22 +10,22 @@ using OnSales.Web.Data.Entities;
 
 namespace OnSales.Web.Controllers
 {
-    public class CountriesController : Controller
+    public class TaxesTypesController : Controller
     {
         private readonly DataContext _context;
 
-        public CountriesController(DataContext context)
+        public TaxesTypesController(DataContext context)
         {
             _context = context;
         }
 
-        // GET: Countries
+        // GET: TaxesTypes
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Countries.ToListAsync());
+            return View(await _context.TaxeTypes.ToListAsync());
         }
 
-        // GET: Countries/Details/5
+        // GET: TaxesTypes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,32 +33,32 @@ namespace OnSales.Web.Controllers
                 return NotFound();
             }
 
-            var country = await _context.Countries
+            var taxesType = await _context.TaxeTypes
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (country == null)
+            if (taxesType == null)
             {
                 return NotFound();
             }
 
-            return View(country);
+            return View(taxesType);
         }
 
-        // GET: Countries/Create
+        // GET: TaxesTypes/Create
         public IActionResult Create()
         {
             return View();
         }
 
- 
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Country country)
+        public async Task<IActionResult> Create( TaxesType taxesType)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Add(country);
+                    _context.Add(taxesType);
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
                 }
@@ -66,7 +66,7 @@ namespace OnSales.Web.Controllers
                 {
                     if (dbUpdateException.InnerException.Message.Contains("duplicate"))
                     {
-                        ModelState.AddModelError(string.Empty, "Ya existe un país con el mismo nombre.");
+                        ModelState.AddModelError(string.Empty, "Ya existe un tipo de impuesto con el mismo nombre.");
                     }
                     else
                     {
@@ -78,11 +78,10 @@ namespace OnSales.Web.Controllers
                     ModelState.AddModelError(string.Empty, exception.Message);
                 }
             }
-            return View(country);
-
+            return View(taxesType);
         }
 
-        // GET: Countries/Edit/5
+        // GET: TaxesTypes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -90,20 +89,20 @@ namespace OnSales.Web.Controllers
                 return NotFound();
             }
 
-            var country = await _context.Countries.FindAsync(id);
-            if (country == null)
+            var taxesType = await _context.TaxeTypes.FindAsync(id);
+            if (taxesType == null)
             {
                 return NotFound();
             }
-            return View(country);
+            return View(taxesType);
         }
 
-     
+    
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id,  Country country)
+        public async Task<IActionResult> Edit(int id,  TaxesType taxesType)
         {
-            if (id != country.Id)
+            if (id != taxesType.Id)
             {
                 return NotFound();
             }
@@ -112,12 +111,12 @@ namespace OnSales.Web.Controllers
             {
                 try
                 {
-                    _context.Update(country);
+                    _context.Update(taxesType);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CountryExists(country.Id))
+                    if (!TaxesTypeExists(taxesType.Id))
                     {
                         return NotFound();
                     }
@@ -128,10 +127,10 @@ namespace OnSales.Web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(country);
+            return View(taxesType);
         }
 
-        // GET: Countries/Delete/5
+       
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -139,34 +138,34 @@ namespace OnSales.Web.Controllers
                 return NotFound();
             }
 
-            var country = await _context.Countries
+            var taxesType = await _context.TaxeTypes
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (country == null)
+            if (taxesType == null)
             {
                 return NotFound();
             }
 
-            return View(country);
+            return View(taxesType);
         }
 
-        // POST: Countries/Delete/5
+  
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var country = await _context.Countries.FindAsync(id);
-            if (country != null)
+            var taxesType = await _context.TaxeTypes.FindAsync(id);
+            if (taxesType != null)
             {
-                _context.Countries.Remove(country);
+                _context.TaxeTypes.Remove(taxesType);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CountryExists(int id)
+        private bool TaxesTypeExists(int id)
         {
-            return _context.Countries.Any(e => e.Id == id);
+            return _context.TaxeTypes.Any(e => e.Id == id);
         }
     }
 }

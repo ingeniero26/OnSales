@@ -1,4 +1,4 @@
-﻿@model OnSales.Web.Data.Entities.Country
+﻿@model OnSales.Web.Data.Entities.TaxesType
 
 @{
     ViewData["Title"] = "Edit";
@@ -6,7 +6,7 @@
 
 <h1>Editar</h1>
 
-<h4>Países</h4>
+<h4>Tipo Impuesto</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -14,13 +14,13 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
-                <label asp-for="NameCountry" class="control-label"></label>
-                <input asp-for="NameCountry" class="form-control" />
-                <span asp-validation-for="NameCountry" class="text-danger"></span>
+                <label asp-for="NameTaxesType" class="control-label"></label>
+                <input asp-for="NameTaxesType" class="form-control" />
+                <span asp-validation-for="NameTaxesType" class="text-danger"></span>
             </div>
             <br />
             <div class="form-group">
-                <input type="submit" value="Guardar" class="btn btn-warning" />
+                <input type="submit" value="Guardar" class="btn btn-primary" />
                 <a asp-action="Index" class="btn btn-outline-info">Listado</a>
             </div>
         </form>
