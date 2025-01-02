@@ -114,19 +114,24 @@ namespace OnSales.Web.Controllers
                 {
                     _context.Update(country);
                     await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (DbUpdateException dbUpdateException)
                 {
-                    if (!CountryExists(country.Id))
+                    if (dbUpdateException.InnerException.Message.Contains("duplicate"))
                     {
-                        return NotFound();
+                        ModelState.AddModelError(string.Empty, "Ya existe un país con el mismo nombre.");
                     }
                     else
                     {
-                        throw;
+                        ModelState.AddModelError(string.Empty, dbUpdateException.InnerException.Message);
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                catch (Exception exception)
+                {
+                    ModelState.AddModelError(string.Empty, exception.Message);
+                }
+
             }
             return View(country);
         }
@@ -164,9 +169,6 @@ namespace OnSales.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CountryExists(int id)
-        {
-            return _context.Countries.Any(e => e.Id == id);
-        }
+       
     }
 }

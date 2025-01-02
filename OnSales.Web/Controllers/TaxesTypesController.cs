@@ -113,19 +113,24 @@ namespace OnSales.Web.Controllers
                 {
                     _context.Update(taxesType);
                     await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (DbUpdateException dbUpdateException)
                 {
-                    if (!TaxesTypeExists(taxesType.Id))
+                    if (dbUpdateException.InnerException.Message.Contains("duplicate"))
                     {
-                        return NotFound();
+                        ModelState.AddModelError(string.Empty, "Ya existe un tipo de impuesto con el mismo nombre.");
                     }
                     else
                     {
-                        throw;
+                        ModelState.AddModelError(string.Empty, dbUpdateException.InnerException.Message);
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                catch (Exception exception)
+                {
+                    ModelState.AddModelError(string.Empty, exception.Message);
+                }
+
             }
             return View(taxesType);
         }
@@ -163,9 +168,5 @@ namespace OnSales.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool TaxesTypeExists(int id)
-        {
-            return _context.TaxeTypes.Any(e => e.Id == id);
-        }
     }
 }
