@@ -15,6 +15,10 @@ namespace OnSales.Web.Data
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Country>().HasIndex(c => c.NameCountry).IsUnique();
+
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<TaxesType>().HasIndex(c => c.NameTaxesType).IsUnique();
+
         }
 
     }
