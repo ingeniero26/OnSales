@@ -2,14 +2,14 @@
 
 namespace OnSales.Web.Data.Entities
 {
-    public class TaxesType
+    public class Taxes
     {
         public int Id { get; set; }
-        [Display(Name = "Tipo Impuesto")]
+        [Display(Name = "Impuesto")]
         [MaxLength(50, ErrorMessage = "El {0} Campo debe tener mas de  {1} caracter.")]
         [Required(ErrorMessage = "El Campo {0}  es obligatorio.")]
-        public string NameTaxesType { get; set; }
+        public string Name { get; set; }
 
-        public ICollection<Taxes> Taxes { get; set; }
+        public TaxesType TaxesType { get; set; }
     }
 }

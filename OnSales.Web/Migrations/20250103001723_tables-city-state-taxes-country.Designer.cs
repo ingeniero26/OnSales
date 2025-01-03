@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnSales.Web.Data;
 
@@ -10,9 +11,11 @@ using OnSales.Web.Data;
 namespace OnSales.Web.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20250103001723_tables-city-state-taxes-country")]
+    partial class tablescitystatetaxescountry
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -112,9 +115,6 @@ namespace OnSales.Web.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.HasIndex("Name", "CountryId")
-                        .IsUnique();
-
                     b.ToTable("Statements");
                 });
 
@@ -135,6 +135,9 @@ namespace OnSales.Web.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
 
                     b.HasIndex("TaxesTypeId");
 

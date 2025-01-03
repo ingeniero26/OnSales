@@ -9,5 +9,10 @@ namespace OnSales.Web.Data.Entities
         [MaxLength(50, ErrorMessage = "El {0} Campo debe tener mas de  {1} caracter.")]
         [Required(ErrorMessage = "El Campo {0}  es obligatorio.")]
         public string NameCountry { get; set; }
+        public ICollection<State> States { get; set; }
+
+        [Display(Name = "Estados / Departamentos")]
+        public int StatesNumber => States == null ? 0 : States.Count;
+
     }
 }
